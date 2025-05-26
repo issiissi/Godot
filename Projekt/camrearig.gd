@@ -1,14 +1,28 @@
+
 extends Node3D
-#Called when the node enters the scene tree for the first time.
+var rotation_speed := 1.5 
+
 func _ready():
-	#code zum initialisieren.
-	pass # Replace with function body.
+	print("Node ist bereit.")
 
-
-#Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# Links (ui_left): Rotation um Y-Achse positiv
 	if Input.is_action_pressed("ui_left"):
-		rotation.y += 0.01
-		print("links gedrückt")
-	#wird aufgerufen wenn ein bild gerendert wird 
-	
+		rotation.y += rotation_speed * delta
+		print("Links gedrückt")
+
+	# Rechts (ui_right): Rotation um Y-Achse negativ
+	if Input.is_action_pressed("ui_right"):
+		rotation.y -= rotation_speed * delta
+		print("Rechts gedrückt")
+
+	# Oben (ui_up): Rotation um X-Achse positiv
+	if Input.is_action_pressed("ui_up"):
+		rotation.x += rotation_speed * delta
+		print("Oben gedrückt")
+
+	# Unten (ui_down): Rotation um X-Achse negativ
+	if Input.is_action_pressed("ui_down"):
+		rotation.x -= rotation_speed * delta
+		print("Unten gedrückt")
+		
