@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://gfykfcjkypk0"]
+[gd_scene load_steps=15 format=3 uid="uid://gfykfcjkypk0"]
 
-[ext_resource type="Script" uid="uid://b3umukonhnyi" path="res://camrearig.gd" id="2_j2q8x"]
 [ext_resource type="PackedScene" uid="uid://bee8343ahvgej" path="res://3DModels/Tree.glb" id="3_112p8"]
 [ext_resource type="PackedScene" uid="uid://bpy4rtr2xafeq" path="res://3DModels/streetlight.glb" id="4_bss38"]
 [ext_resource type="PackedScene" uid="uid://drdnppjahfah5" path="res://3DModels/street.glb" id="4_e2u21"]
+[ext_resource type="Script" uid="uid://1ysu6vdnbjpf" path="res://rigid_body_3d.gd" id="5_bss38"]
+[ext_resource type="Script" uid="uid://djls08yll1rtr" path="res://character_body_3d.gd" id="5_tda05"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sy5k4"]
 sky_horizon_color = Color(0.651746, 0.665753, 0.715804, 1)
@@ -18,36 +19,91 @@ background_mode = 2
 sky = SubResource("Sky_j2q8x")
 tonemap_mode = 2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_e2u21"]
+size = Vector3(76.7382, 1, 12.6407)
+
+[sub_resource type="SphereMesh" id="SphereMesh_e2u21"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bss38"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e2u21"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bss38"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tda05"]
+radius = 0.1
+height = 0.5
+
 [node name="node" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_112p8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0.00195014, 0.0122223, -0.00514865)
-visible = false
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -3.06655, 0.0122223, -0.00514865)
+light_energy = 0.515
 shadow_enabled = true
+shadow_bias = 1.0
+shadow_blur = 1.455
 
 [node name="camrearig" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0663328, 0.132497, -0.0508174)
-script = ExtResource("2_j2q8x")
 
 [node name="Camera3D" type="Camera3D" parent="camrearig"]
-transform = Transform3D(0.999951, 0.00698109, 0.00698126, -0.00698126, 0.999976, -3.2509e-12, -0.00698109, -4.8738e-05, 0.999976, -4.5998, 1.24264, -0.797835)
+transform = Transform3D(0.999951, 0.00698109, 0.00698126, -0.00698126, 0.999976, -1.39326e-11, -0.00698109, -4.8738e-05, 0.999976, -10.8877, 1.67619, -1.50839)
 fov = 91.5762
 near = 0.001
 
 [node name="Tree" parent="." instance=ExtResource("3_112p8")]
 transform = Transform3D(1, 0, 0, 0, 0.998642, -0.0520919, 0, 0.0520919, 0.998642, 1.00477, 0.412459, 1.91565)
 
-[node name="street" parent="." instance=ExtResource("4_e2u21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.473118, -0.135788, -0.302446)
-
 [node name="streetlight" parent="." instance=ExtResource("4_bss38")]
-transform = Transform3D(0.542236, 0, 0.840226, 0, 1, 0, -0.840226, 0, 0.542236, -13.306, 0.59411, -4.76998)
+transform = Transform3D(0.542236, 0, 0.840226, 0, 1, 0, -0.840226, 0, 0.542236, -13.306, 0.400749, -4.14891)
 
 [node name="streetlight2" parent="." instance=ExtResource("4_bss38")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41822, 0.59411, -0.941874)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41822, 0.482565, -0.0191808)
 
 [node name="Tree2" parent="." instance=ExtResource("3_112p8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.577, 0.571925, -8.35266)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="street" parent="StaticBody3D" instance=ExtResource("4_e2u21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.473118, -0.135788, -0.302446)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5983, -0.303303, -3.65472)
+shape = SubResource("BoxShape3D_e2u21")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32097, 2.71666, -1.27595)
+script = ExtResource("5_bss38")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123112, 0)
+mesh = SubResource("SphereMesh_e2u21")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_bss38")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.23456, -0.418702, -0.877308, 0.119396, 0.908062, -0.401457, 0.964741, -0.010581, 0.262987, -1.67389, 0.0739189, 0.152737)
+visible = false
+use_collision = true
+size = Vector3(1, 0.741211, 3.62939)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1905, 1.31869, -4.26094)
+script = ExtResource("5_tda05")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_e2u21")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_bss38")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/MeshInstance3D"]
+transform = Transform3D(0.98683, -0.161759, 0, -0.000217386, -0.00132619, -0.999999, 0.161759, 0.986829, -0.00134389, 0, 0, -0.851696)
+visible = false
+mesh = SubResource("CapsuleMesh_tda05")
+skeleton = NodePath("../..")
