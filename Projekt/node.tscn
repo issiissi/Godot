@@ -46,14 +46,6 @@ shadow_enabled = true
 shadow_bias = 1.0
 shadow_blur = 1.455
 
-[node name="camrearig" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0663328, 0.132497, -0.0508174)
-
-[node name="Camera3D" type="Camera3D" parent="camrearig"]
-transform = Transform3D(0.999951, 0.00698109, 0.00698126, -0.00698126, 0.999976, -1.39326e-11, -0.00698109, -4.8738e-05, 0.999976, -10.8877, 1.67619, -1.50839)
-fov = 91.5762
-near = 0.001
-
 [node name="Tree" parent="." instance=ExtResource("3_112p8")]
 transform = Transform3D(1, 0, 0, 0, 0.998642, -0.0520919, 0, 0.0520919, 0.998642, 1.00477, 0.412459, 1.91565)
 
@@ -80,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32097, 2.71666, -1.27595)
 script = ExtResource("5_bss38")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123112, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.32136, 0.56994, -5.59828)
 mesh = SubResource("SphereMesh_e2u21")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
@@ -93,7 +85,7 @@ use_collision = true
 size = Vector3(1, 0.741211, 3.62939)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1905, 1.31869, -4.26094)
+transform = Transform3D(0.311987, 0, 0.950086, 0, 1, 0, -0.950086, 0, 0.311987, -11.1905, 1.31869, -4.26094)
 script = ExtResource("5_tda05")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -107,3 +99,11 @@ transform = Transform3D(0.98683, -0.161759, 0, -0.000217386, -0.00132619, -0.999
 visible = false
 mesh = SubResource("CapsuleMesh_tda05")
 skeleton = NodePath("../..")
+
+[node name="camrearig" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(0.311987, 0, -0.950086, 0, 1, 0, 0.950086, 0, 0.311987, 1.31088, -1.18619, 2.24527)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/camrearig"]
+transform = Transform3D(0.905132, 0.00631912, -0.425084, -0.00698126, 0.999976, 9.7423e-10, 0.425074, 0.00296762, 0.905154, -1.72487, 1.67619, 3.75654)
+fov = 91.5762
+near = 0.001
