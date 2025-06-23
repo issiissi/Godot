@@ -1,9 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://gfykfcjkypk0"]
+[gd_scene load_steps=23 format=3 uid="uid://gfykfcjkypk0"]
 
 [ext_resource type="Script" uid="uid://1ysu6vdnbjpf" path="res://testprojekt/rigid_body_3d.gd" id="4_ivehd"]
 [ext_resource type="Script" uid="uid://djls08yll1rtr" path="res://testprojekt/character_body_3d.gd" id="5_jh6l8"]
 [ext_resource type="ArrayMesh" uid="uid://cvhiyvf885wfc" path="res://testprojekt/3DModels/obj/street.obj" id="6_7l7su"]
-[ext_resource type="Script" uid="uid://b5rqsv6uy6nf" path="res://testprojekt/mesh_instance_3d_2.gd" id="6_tx6yl"]
+[ext_resource type="Script" uid="uid://16vm6tqec85p" path="res://testprojekt/mesh_instance_3d.gd" id="6_tx6yl"]
 [ext_resource type="ArrayMesh" uid="uid://d1is62k4k47kq" path="res://testprojekt/3DModels/obj/baum.obj" id="7_tx6yl"]
 [ext_resource type="ArrayMesh" uid="uid://cdq5c0asl5j46" path="res://testprojekt/3DModels/obj/streetlight.obj" id="8_ivehd"]
 
@@ -54,9 +54,6 @@ albedo_color = Color(0.00465663, 0.134196, 3.60981e-08, 1)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_u54le"]
 data = PackedVector3Array(0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivehd"]
-albedo_color = Color(0.243137, 1, 1, 1)
 
 [node name="node" type="Node3D"]
 
@@ -207,12 +204,8 @@ script = ExtResource("4_ivehd")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("SphereMesh_e2u21")
-surface_material_override/0 = SubResource("StandardMaterial3D_ivehd")
+script = ExtResource("6_tx6yl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_heodf")
-
-[node name="Geometrie" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58685, 0.825563, 0)
-script = ExtResource("6_tx6yl")
